@@ -7,6 +7,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 # =============================
 # Load from environment variables
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+if not TELEGRAM_TOKEN:
+    raise ValueError("❌ TELEGRAM_TOKEN not set! Check Render environment variables.")
+
 HF_TOKEN = os.getenv("HF_TOKEN")
 HF_MODEL_URL = os.getenv(
     "HF_MODEL_URL",
@@ -72,3 +75,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
