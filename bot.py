@@ -6,6 +6,7 @@ from io import BytesIO
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Load .env if present (local dev). On Render/Heroku use real environment variables.
 load_dotenv()
@@ -107,14 +108,15 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await message.reply_text(f"⚠️ Error while generating video: {e}")
 
 def main():
-    app = Application.builder().token(TELEGRAM_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    # photo handler
-    app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
-    LOG.info("Bot started")
-    app.run_polling()
+    updater = Updater(TELEGRAM_TOKEN, use_context=True)
+    dp = updater.dispatcher
+    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(MessageHandler(Filters.photo, handle_photo))
+    updater.start_polling()
+    updater.idle()
 
 if __name__ == "__main__":
     main()
+
 
 
