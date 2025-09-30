@@ -14,8 +14,8 @@ LOG = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 # Environment variables (set these in Render/Heroku or .env locally)
-TELEGRAM_TOKEN = os.getenv("8308255322:AAHOGU2NF53BDxhbpvnAjG7r_hYYjZgRGgE")
-HF_TOKEN = os.getenv("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")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+HF_TOKEN = os.getenv("HF_TOKEN")
 # Choose model URL — you can change to another image->video model if desired
 # Examples:
 # "https://api-inference.huggingface.co/models/ali-vilab/i2vgen-xl"
@@ -116,4 +116,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
